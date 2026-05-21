@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.DS_Store
+
+venv/
+.venv/
+env/
+
+.vscode/
+
+код.txt
+voiceBot.py
+test.py
+ESP8266_GENERIC-20251209-v1.27.0.bin

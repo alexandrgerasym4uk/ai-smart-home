@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="status-card">
+        <div id="home-status" style="font-weight: bold; font-size: 18px;">Завантаження...</div>
+        <div id="users-display" style="margin-top: 10px;"></div>
+    </div>
+
+    <h3>ОСВІТЛЕННЯ</h3>
+    <div class="grid">
+        <div id="Vitalnya" class="card" onclick="toggleLight('Vitalnya')">Вітальня</div>
+        <div id="Kukhnya" class="card" onclick="toggleLight('Kukhnya')">Кухня</div>
+        <div id="Spalnya" class="card" onclick="toggleLight('Spalnya')">Спальня</div>
+        <div id="Garderob" class="card" onclick="toggleLight('Garderob')">Гардероб</div>
+        <div id="Stilnytsya" class="card" onclick="toggleLight('Stilnytsya')">Стільниця</div>
+        <div id="Polytsi" class="card" onclick="toggleLight('Polytsi')">Полиці</div>
+        <div id="Lampa_1" class="card" onclick="toggleLight('Lampa_1')">Лампа 1</div>
+        <div id="Lampa_2" class="card" onclick="toggleLight('Lampa_2')">Лампа 2</div>
+    </div>
+
+    <h3 class="cleaning-title">ПРИБИРАННЯ</h3>
+    
+    <div class="grid">
+        <div id="vac-main-btn" class="card" onclick="handleVacuumMainAction()">Прибрати</div>
+        <div id="vac-home" class="card" onclick="controlVacuum('home')">На базу</div>
+    </div>
+
+    <div class="status-card" style="margin-top: 10px; text-align: left; border-left: 4px solid #2196f3;">
+        <div style="font-size: 12px; color: #888;">Статус пристрою:</div>
+        <div id="vac-status-display" class="status-val">Очікування</div>
+    </div>
+
+    <div class="climate-box">
+        <div class="control-header">
+            <span>Потужність: <b><span id="vac-fan-val">Balanced</span></b></span>
+        </div>
+        <input type="range" id="slider-vac-fan" min="101" max="104" step="1" value="102" oninput="updateVacLabels('fan', this.value)" onchange="sendVacParam('fan', this.value)">
+    </div>
+
+    <div class="climate-box">
+        <div class="control-header">
+            <span>Вологе прибирання: <b><span id="vac-water-val">Low</span></b></span>
+        </div>
+        <input type="range" id="slider-vac-water" min="200" max="203" step="1" value="201" oninput="updateVacLabels('water', this.value)" onchange="sendVacParam('water', this.value)">
+    </div>
+
+    <h3>ВЕНТИЛЯЦІЯ</h3>
+    <div class="grid">
+        <div id="Toilet_Fan_Card" class="card" onclick="toggleFan('Toilet_Fan')">Витяжка Туалет</div>
+    </div>
+
+    <h3>КЛІМАТ</h3>
+    <div class="climate-box">
+        <div class="control-header">
+            <span>Тепла підлога: <b><span id="floor-val"></span>%</b></span>
+            <button id="btn-floor" class="btn-toggle" onclick="toggleClimate('floor')">OFF</button>
+        </div>
+        <input type="range" id="slider-floor" min="0" max="100" onchange="sendClimate('floor', this.value)">
+    </div>
+
+    <h3 class="cleaning-title">КОНДИЦІОНЕР</h3>
+
+<div class="status-card" id="ac-card">
+    <div class="control-header">
+        <span id="ac-status-text">Кондиціонер: OFF</span>
+        <button id="btn-ac" class="btn-toggle" onclick="toggleAC()">OFF</button>
+    </div>
+
+    <div class="climate-box">
+        <div class="control-header">
+            <span>Температура: <b><span id="ac-temp-val">22</span>°C</b></span>
+        </div>
+        <input type="range" id="slider-ac-temp" min="16" max="30" step="1" value="22" 
+               oninput="document.getElementById('ac-temp-val').innerText = this.value" 
+               onchange="sendACParam('temp', this.value)">
+    </div>
+
+    <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 10px;">
+        <div class="mode-btn" id="mode-cool" onclick="sendACParam('mode', 'cool')">Cool</div>
+        <div class="mode-btn" id="mode-heat" onclick="sendACParam('mode', 'heat')">Heat</div>
+        <div class="mode-btn" id="mode-dry" onclick="sendACParam('mode', 'dry')">Dry</div>
+    </div>
+    
+    <div class="climate-box" style="margin-top: 15px;">
+        <div class="control-header">
+            <span>Потік повітря:</span>
+            <select id="ac-swing" onchange="sendACParam('swing', this.value)" style="background: #333; color: white; border: 1px solid #555; padding: 5px; border-radius: 5px;">
+                <option value="fixed">Фіксований</option>
+                <option value="vertical">Вертикальний</option>
+                <option value="horizontal">Горизонтальний</option>
+                <option value="full">Авто (Full)</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
