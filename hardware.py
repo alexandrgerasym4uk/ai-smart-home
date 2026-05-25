@@ -1,10 +1,11 @@
 DEVICE_MAP = {
     "світл": "lighting",
-    "приб": "vacuum",
-    "кондиціонер": "climate",
-    "вентиляц": "fan",
-    "тепл": "floor",
-    "підлог": "floor"
+    "пилосос": "vacuum",
+    "кондиціонер": "ac",
+    "вентиляц": "ventilation",
+    "тепл": "climate",
+    "підлог": "climate",
+    "гоша": "vacuum"
 }
 
 STATE_MAP = {
@@ -12,26 +13,25 @@ STATE_MAP = {
     "включ": 1,
     "вимкн": 0,
     "виключ": 0,
-    "запуст": 1
+    "запуст": 1,
+    "зупини": 0,
+    "приб": 1
 }
 
 PARAMETERS_MAP = {
-    "вітальн": "vitalnya",
-    "кухн": "kukhnya",
-    "спальн": "spalnya",
-    "гардероб": "garderob",
-    "стільн": "stilnitsya",
-    "пол": "polytsi",
-    "лів": "lampa1",
-    "прав": "lampa2",
-    "%": "power_floor",
-    "°": "temperature",
+    "вітальн": "toggle_living_room",
+    "кухн": "toggle_kitchen",
+    "спальн": "toggle_bedroom",
+    "гардероб": "toggle_wardrobe",
+    "стільн": "toggle_kitchen_counter",
+    "пол": "toggle_shelf_light",
+    "лів": "toggle_bedside_1",
+    "прав": "toggle_bedside_2",
+    "%": "set_floor_power",
+    "°": "set_ac_power",
+    "додом": "go_home"
     # "": "ac_mode",
     # "": "swing",
     # "": "power_vaccum",
     # "": "power_water"
-}
-
-ADDITIONAL_MAP = {
-    
 }

@@ -3,8 +3,7 @@ import telebot
 import json
 import speech_recognition as sr
 from pydub import AudioSegment
-from core import HomeCore
-core = HomeCore()
+from core import translate_command
 
 config_path = os.path.join(os.path.dirname(__file__), 'config.json')
 with open(config_path, 'r', encoding='utf-8') as f:
@@ -56,7 +55,7 @@ def handle_voice(message):
         print(f"[{message.from_user.first_name}]: {text}")
         bot.reply_to(message, f"Розпізнано: \"{text}\"")
         
-        core.translate_command(text)
+        translate_command(text)
             
     except sr.UnknownValueError:
         bot.reply_to(message, "Не зміг розібрати слова.")
