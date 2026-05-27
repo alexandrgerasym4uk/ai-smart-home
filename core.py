@@ -1,4 +1,3 @@
-
 from hardware import DEVICE_MAP, STATE_MAP, PARAMETERS_MAP
 import re
 import importlib
@@ -54,7 +53,6 @@ def translate_command(code_str):
     dispatch(command)
 
         
-
 def dispatch(command):
     device, parameter, state, additional = command
     module = importlib.import_module(device)
@@ -70,7 +68,3 @@ def dispatch(command):
         return func(state)
     else:
         return func()
-
-
-# code_str = "вимкни світло у кухні"
-# translate_command(code_str)

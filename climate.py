@@ -1,17 +1,45 @@
+import json
+
+STATE_FILE = "state.json"
+
+
+def load_state():
+    with open(STATE_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_state(state):
+    with open(STATE_FILE, "w", encoding="utf-8") as f:
+        json.dump(state, f, indent=2, ensure_ascii=False)
+
+
+
 def default(state):
+    data = load_state()
+
     if not state:
-        set_floor_power(0, 0)
+        set_floor_power(False, 0)
+
+        data["climate"]["state"] = 0
+        data["climate"]["power"] = 0
+
+        save_state(data)
 
 
+def set_floor_power(state: bool, power=0):
 
-def set_floor_power(state: bool, power):
-    """Керування живленням підлоги"""
+    data = load_state()
+
     if state:
         power = int(power)
-        print(f"[CLIMATE] Тепла підлога: ON")
+
+
+        data["climate"]["state"] = 1
+
         if 0 <= power <= 100:
-            print(f"[CLIMATE] Встановлено температуру: {power}°C")
-        else:
-            print("[CLIMATE] Помилка: Некоректна температура")
+            data["climate"]["power"] = power
+
     else:
-        print(f"[CLIMATE] Тепла підлога: OFF")
+        data["climate"]["state"] = 0
+
+    save_state(data)

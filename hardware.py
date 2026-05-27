@@ -29,9 +29,8 @@ PARAMETERS_MAP = {
     "прав": "toggle_bedside_2",
     "%": "set_floor_power",
     "°": "set_ac_power",
-    "додом": "go_home"
+    "додом": "go_home",
     # "": "ac_mode",
-    # "": "swing",
     # "": "power_vaccum",
     # "": "power_water"
 }

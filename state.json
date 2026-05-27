@@ -1,0 +1,29 @@
+{
+  "lighting": {
+    "vitalnya": 0,
+    "kukhnya": 0,
+    "spalnya": 0,
+    "garderob": 0,
+    "stilnitsya": 0,
+    "polytsi": 0,
+    "lampa1": 0,
+    "lampa2": 0
+  },
+  "vacuum": {
+    "state": "returning",
+    "fan_power": 104,
+    "water_level": 201
+  },
+  "ventilation": 0,
+  "climate": {
+    "state": 0,
+    "power": 30
+  },
+  "ac": {
+    "is_on": true,
+    "temperature": 20,
+    "mode": "dry",
+    "fan_speed": "medium",
+    "swing": "full"
+  }
+}
