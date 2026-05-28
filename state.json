@@ -10,7 +10,7 @@
     "lampa2": 0
   },
   "vacuum": {
-    "state": "returning",
+    "state": "charging",
     "fan_power": 104,
     "water_level": 201
   },

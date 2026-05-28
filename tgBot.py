@@ -15,6 +15,43 @@ ALLOWED_USERS = config["ALLOWED_USERS"]
 bot = telebot.TeleBot(TOKEN)
 recognizer = sr.Recognizer()
 
+
+def format_status(data):
+    text = "📊 *СТАН СИСТЕМИ*\n\n"
+
+    text += "💡 Освітлення:\n"
+    for room, value in data["lighting"].items():
+        state = "увімкнено" if value else "вимкнено"
+        text += f"  • {room}: {state}\n"
+
+    vacuum = data["vacuum"]
+    text += "\n🤖 Пилосос:\n"
+    text += f"  • Стан: {vacuum['state']}\n"
+    text += f"  • Потужність: {vacuum['fan_power']}\n"
+    text += f"  • Вода: {vacuum['water_level']}\n"
+
+    text += f"\n🌬 Вентиляція: {'увімкнена' if data['ventilation'] else 'вимкнена'}\n"
+
+    climate = data["climate"]
+    text += "\n🌡 Клімат:\n"
+    text += f"  • Стан: {'увімкнений' if climate['state'] else 'вимкнений'}\n"
+    text += f"  • Потужність: {climate['power']}\n"
+
+    ac = data["ac"]
+    text += "\n❄️ Кондиціонер:\n"
+    text += f"  • Стан: {'увімкнений' if ac['is_on'] else 'вимкнений'}\n"
+    text += f"  • Температура: {ac['temperature']}°C\n"
+    text += f"  • Режим: {ac['mode']}\n"
+    text += f"  • Швидкість: {ac['fan_speed']}\n"
+    text += f"  • Swing: {ac['swing']}\n"
+
+    return text
+
+
+def get_status():
+    with open('state.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
+
 def is_allowed(message):
     return message.from_user.id in ALLOWED_USERS
 
@@ -53,9 +90,17 @@ def handle_voice(message):
             text = recognizer.recognize_google(audio_data, language="uk-UA").lower()
             
         print(f"[{message.from_user.first_name}]: {text}")
-        bot.reply_to(message, f"Розпізнано: \"{text}\"")
+        bot.reply_to(message, "Виконано")
         
+        
+        if "стату" in text:
+            data = get_status()
+            status_text = format_status(data)
+            bot.reply_to(message, status_text, parse_mode="Markdown")
+            return
+
         translate_command(text)
+        
             
     except sr.UnknownValueError:
         bot.reply_to(message, "Не зміг розібрати слова.")
@@ -66,6 +111,19 @@ def handle_voice(message):
             os.remove(ogg_filename)
         if os.path.exists(wav_filename):
             os.remove(wav_filename)
+
+@bot.message_handler(commands=['status'])
+def send_status(message):
+    if not is_allowed(message):
+        bot.reply_to(message, "У вас немає доступу.")
+        return
+
+    try:
+        data = get_status()
+        text = format_status(data)
+        bot.reply_to(message, text, parse_mode="Markdown")
+    except Exception as e:
+        bot.reply_to(message, f"Помилка: {str(e)}")
 
 print("Бот запущений...")
 bot.polling(none_stop=True)
