@@ -1,27 +1,27 @@
 {
   "lighting": {
     "vitalnya": 0,
-    "kukhnya": 0,
+    "kukhnya": 1,
     "spalnya": 0,
-    "garderob": 0,
+    "garderob": 1,
     "stilnitsya": 0,
-    "polytsi": 0,
+    "polytsi": 1,
     "lampa1": 0,
     "lampa2": 0
   },
   "vacuum": {
     "state": "charging",
-    "fan_power": 104,
-    "water_level": 201
+    "fan_power": 102,
+    "water_level": 202
   },
   "ventilation": 0,
   "climate": {
     "state": 0,
-    "power": 30
+    "power": 20
   },
   "ac": {
-    "is_on": true,
-    "temperature": 20,
+    "is_on": false,
+    "temperature": 23,
     "mode": "dry",
     "fan_speed": "medium",
     "swing": "full"

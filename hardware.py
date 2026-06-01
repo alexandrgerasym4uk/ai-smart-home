@@ -5,7 +5,8 @@ DEVICE_MAP = {
     "вентиляц": "ventilation",
     "тепл": "climate",
     "підлог": "climate",
-    "гоша": "vacuum"
+    "гоша": "vacuum",
+    "приб": "vacuum"
 }
 
 STATE_MAP = {

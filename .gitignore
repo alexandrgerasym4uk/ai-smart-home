@@ -16,3 +16,4 @@ config.json
 
 test.py
 ESP8266_GENERIC-20251209-v1.27.0.bin
+weather.txt
