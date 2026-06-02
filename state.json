@@ -1,4 +1,5 @@
 {
+  "manual_control": 1,
   "lighting": {
     "vitalnya": 0,
     "kukhnya": 1,
@@ -14,13 +15,13 @@
     "fan_power": 102,
     "water_level": 202
   },
-  "ventilation": 0,
+  "ventilation": 1,
   "climate": {
-    "state": 0,
+    "state": 1,
     "power": 20
   },
   "ac": {
-    "is_on": false,
+    "is_on": true,
     "temperature": 23,
     "mode": "dry",
     "fan_speed": "medium",

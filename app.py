@@ -29,6 +29,8 @@ def get_status():
 def toggle_room(room):
     state = load_state()
     current_state = state["lighting"].get(room, 0)
+    
+
     new_state = 0 if current_state == 1 else 1
 
     room_commands = {
@@ -45,8 +47,10 @@ def toggle_room(room):
     cmd_code = room_commands.get(room)
     if cmd_code:
         dispatch([ 'lighting', cmd_code, new_state, None ])
+
         return jsonify(success=True, room=room, new_state=new_state)
     
+
     save_state(state)
 
     return jsonify(success=False, error="Кімнату не знайдено"), 404

@@ -39,8 +39,6 @@ def set_light_state(room_name, state):
     data["lighting"][room_name] = int(state)
     save_state(data)
 
-    print("[STATE UPDATED]", data)
-
 
 
 def toggle_living_room(state: bool, *args):
